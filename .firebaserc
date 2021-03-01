@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "profile-approval": {
+      "hosting": {
+        "profile-approval": [
+          "profile-approval"
+        ]
+      }
+    }
+  }
+}

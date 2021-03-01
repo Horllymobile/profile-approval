@@ -5,7 +5,7 @@ import { ListComponent } from './components/list/list.component';
 import { RegisterComponent } from './components/register/register.component';
 
 const routes: Routes = [
-  //{path: '', redirectTo: 'home', pathMatch: 'full'},
+  {path: '', redirectTo: 'register', pathMatch: 'full'},
   {
     path: 'home',
     component: HomeComponent,

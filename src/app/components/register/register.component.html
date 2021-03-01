@@ -1,41 +1,64 @@
-<div class="col-lg-6">
-  <div class="container m-5">
-    <h1 class="text-center">Register</h1>
-    <form class="mx-auto">
-      <div class="mb-3">
-        <label for="formFile" class="form-label">Profile Picture</label>
-        <input class="form-control" type="file" id="formFile">
-      </div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-4  col-md-12 col-sm-12 col-xm-12">
+      <div class="container m-5 mx-auto" >
+        <h1 class="text-center mb-3">Register</h1>
+        <form [formGroup] ="registerForm" (ngSubmit)="register()">
 
-      <div class="form-group">
-        <label for="firstname">First Name</label>
-        <input id="firstname" class="form-control" type="text">
-      </div>
+          <div class="mb-3">
+            <label for="formFile" class="form-label">Profile Picture</label>
+            <input class="form-control" type="file" id="formFile" formControlName="image" (change)="uploadImage($event)"  accept="image/*">
+          </div>
 
-      <div class="form-group">
-        <label for="lastname">Last Name</label>
-        <input id="lastname" class="form-control" type="text">
-      </div>
+          <div class="form-group">
+            <label for="firstname">First Name</label>
+            <input id="firstname" class="form-control" type="text" formControlName="firstname">
+          </div>
 
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input id="email" class="form-control" type="email">
-      </div>
+          <div class="form-group">
+            <label for="lastname">Last Name</label>
+            <input id="lastname" class="form-control" type="text" formControlName="lastname">
+          </div>
 
-      <div class="form-group">
-        <label for="age">Age</label>
-        <input id="age" class="form-control" type="number">
-      </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input id="email" class="form-control" type="email" formControlName="email">
+          </div>
 
-      <div class="form-group">
-        <label for="phonenumber">Phone Number</label>
-        <input id="phonenumber" class="form-control" type="tel">
+          <div class="form-group">
+            <label for="age">Age</label>
+            <input id="age" class="form-control" type="number" formControlName="age">
+          </div>
+
+          <div class="form-group">
+            <label for="phonenumber">Phone Number</label>
+            <input id="phonenumber" class="form-control" type="tel" formControlName="phone">
+          </div>
+          <div class="text-center">
+            <input type="submit" value="Register" [disabled]="registerForm.invalid" class="btn btn-primary">
+          </div>
+        </form>
       </div>
-      <div class="text-center">
-        <input type="submit" value="Register" class="btn btn-primary">
+    </div>
+    <div class="col-lg-7 col-md-12 col-sm-12 col-xm-12">
+      <div class="mt-5">
+        <h1>All Users</h1>
+       <div class="d-flex justify-content-center">
+          <div *ngIf="!users" class="spinner-grow mx-auto my-auto text-primary" role="status">
+          </div>
+       </div>
+        <div *ngIf="users.length > 0" class="container card mt-4" style="width: 80% !important;">
+          <div class="m-5">
+            <ul class="list-group" *ngFor="let user of users">
+              <li class="list-group-item mb-2 d-flex justify-content-between align-items-center">
+                {{ user.firstname }} {{ user.lastname}}
+                <span *ngIf="user.approved" class="badge bg-success  text-white rounded-pill material-icons ">done</span>
+                <span *ngIf="!user.approved" class="badge text-warning rounded-pill material-icons">pending</span>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
-    </form>
+    </div>
   </div>
 </div>
-<div class="col-lg-6"></div>
-

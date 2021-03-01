@@ -4,7 +4,6 @@ import { UsersService } from './../../services/users.service';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { AngularFireDatabase, AngularFireList, AngularFireObject } from '@angular/fire/database';
 import { User } from 'src/app/models/user';
-import { Observable } from 'rxjs';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -14,6 +13,7 @@ export class RegisterComponent implements OnInit {
   users!: User[];
   registerForm!: FormGroup;
   imageUrl!: string;
+  p =1
   constructor(
     private formBuilder: FormBuilder,
     private userService: UsersService,
@@ -35,7 +35,9 @@ export class RegisterComponent implements OnInit {
     this.userService.getUsers()
     .valueChanges()
     .subscribe((data) => {
-      this.users = data;
+      setTimeout(() => {
+        this.users = data;
+      }, 2000);
     });
   }
 
@@ -74,7 +76,7 @@ export class RegisterComponent implements OnInit {
         phone: this.registerForm.get('phone')?.value,
         approved: false,
     }
-
+    this.registerForm.reset();
     this.userService.addUser(user);
   }
 

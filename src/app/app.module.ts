@@ -6,6 +6,10 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { HttpClientModule } from '@angular/common/http';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+
 // environment
 import { environment } from '../environments/environment';
 
@@ -15,7 +19,6 @@ import { AppComponent } from './app.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ListComponent } from './components/list/list.component';
 import { HomeComponent } from './components/home/home.component';
-import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -30,9 +33,14 @@ import { RouterModule } from '@angular/router';
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     HttpClientModule,
+    NgxPaginationModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      
+    }),
     AngularFireDatabaseModule,
     AngularFirestoreModule,
-    AngularFireStorageModule
+    AngularFireStorageModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

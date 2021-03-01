@@ -1,6 +1,6 @@
-<div class="container-fluid">
+<div class="container-fluid" style="height: 100% !important;">
   <div class="row">
-    <div class="col-lg-4  col-md-12 col-sm-12 col-xm-12">
+    <div class="col-lg-5  col-md-12 col-sm-12 col-xm-12">
       <div class="container m-5 mx-auto" >
         <h1 class="text-center mb-3">Register</h1>
         <form [formGroup] ="registerForm" (ngSubmit)="register()">
@@ -42,21 +42,23 @@
     </div>
     <div class="col-lg-7 col-md-12 col-sm-12 col-xm-12">
       <div class="mt-5">
-        <h1>All Users</h1>
-       <div class="d-flex justify-content-center">
+        <h1 class="text-center">All Users</h1>
+       <div class="d-flex justify-content-center align-items-center">
           <div *ngIf="!users" class="spinner-grow mx-auto my-auto text-primary" role="status">
           </div>
        </div>
-        <div *ngIf="users.length > 0" class="container card mt-4" style="width: 80% !important;">
+        <div *ngIf="users.length > 0" class="container-fluid card mt-4" style="width: 100% !important;">
           <div class="m-5">
-            <ul class="list-group" *ngFor="let user of users">
+            <ul class="list-group" *ngFor="let user of users | paginate: { itemsPerPage: 8, currentPage: p }">
               <li class="list-group-item mb-2 d-flex justify-content-between align-items-center">
                 {{ user.firstname }} {{ user.lastname}}
                 <span *ngIf="user.approved" class="badge bg-success  text-white rounded-pill material-icons ">done</span>
-                <span *ngIf="!user.approved" class="badge text-warning rounded-pill material-icons">pending</span>
+                <span *ngIf="!user.approved" class="badge bg-warning text-white rounded-pill material-icons">pending</span>
               </li>
             </ul>
           </div>
+          <pagination-controls (pageChange)="p = $event" [autoHide]="false"
+           [responsive]="true" previousLabel="prev" nextLabel="next"></pagination-controls>
         </div>
       </div>
     </div>
